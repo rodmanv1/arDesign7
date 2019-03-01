@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "603166198212",
+    "firebase_url": "https://ardesign13-ea417.firebaseio.com",
+    "project_id": "ardesign13-ea417",
+    "storage_bucket": "ardesign13-ea417.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603166198212:android:644b1e4b8b35bf75",
+        "android_client_info": {
+          "package_name": "com.dev.vova.ardesign7"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603166198212-9jqnamcmujqm5n8hd2ukgok9dr6bpeej.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.vova.ardesign17",
+            "certificate_hash": "096408536d1b3846546d2e3d865bf00591d4a960"
+          }
+        },
+        {
+          "client_id": "603166198212-encc8j9cntp465fos7icb0qqtirpq77k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOtt8wtrtwdInjcLtCNgjmEpdUq7iAkEc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603166198212-encc8j9cntp465fos7icb0qqtirpq77k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
