@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button loginBtn;
-    Button requestLoginBtn;
+    Button registerBtn;
     EditText username;
     EditText password;
 
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loginBtn.setOnClickListener( this );
 
 
-        requestLoginBtn = findViewById( R.id.requestLoginBtn );
-        requestLoginBtn.setOnClickListener( this );
+        registerBtn = findViewById( R.id.registerBtn );
+        registerBtn.setOnClickListener( this );
 
         FirebaseApp.initializeApp(this);
 
@@ -104,9 +104,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
 
-            case R.id.requestLoginBtn:
-                intent = new Intent( this, requestForLogin.class );
-                startActivity( intent );
+            case R.id.registerBtn:
+                register( username.getText().toString(),password.getText().toString() );
+
+//                intent = new Intent( this, requestForLogin.class );
+//                startActivity( intent );
 
                 break;
 
@@ -115,5 +117,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+            public void register (String username,String password) {
 
+                mAuth.createUserWithEmailAndPassword(username, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(LOG_TAG, "createUserWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(LOG_TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(MainActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                    updateUI(null);
+                                }
+
+                                // ...
+                            }
+                        });
+
+
+
+
+            }
 }

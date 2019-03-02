@@ -18,8 +18,16 @@
           "client_id": "603166198212-9jqnamcmujqm5n8hd2ukgok9dr6bpeej.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.dev.vova.ardesign17",
+            "package_name": "com.dev.vova.ardesign7",
             "certificate_hash": "096408536d1b3846546d2e3d865bf00591d4a960"
+          }
+        },
+        {
+          "client_id": "603166198212-hbnn1d13g3fltdf6e4jafj9e9aas4mpr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.vova.ardesign7",
+            "certificate_hash": "fdd044a9f2532bacdbaf7f6c4072c189ca29e635"
           }
         },
         {
