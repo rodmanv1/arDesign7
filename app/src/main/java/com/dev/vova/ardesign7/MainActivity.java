@@ -47,47 +47,66 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         registerBtn = findViewById( R.id.registerBtn );
         registerBtn.setOnClickListener( this );
 
-        FirebaseApp.initializeApp(this);
+        FirebaseApp.initializeApp( this );
 
         mAuth = FirebaseAuth.getInstance();
 
 
     }
+
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        updateUI( currentUser );
     }
 
     private void updateUI(FirebaseUser currentUser) {
 
     }
 
-    public void signIn(String username,String password) {
+    public void signIn(String username, String password) {
 
-        mAuth.signInWithEmailAndPassword(username, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword( username, password )
+                .addOnCompleteListener( this, new OnCompleteListener <AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                    public void onComplete(@NonNull Task <AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(LOG_TAG, "signInWithEmail:success");
+                            Log.d( LOG_TAG, "signInWithEmail:success" );
                             Toast.makeText( MainActivity.this, "Login Success", Toast.LENGTH_SHORT ).show();
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            updateUI( user );
+                            user = FirebaseAuth.getInstance().getCurrentUser();
+                            if (user != null) {
+                                // Name, email address, and profile photo Url
+                                String name = user.getDisplayName();
+                                String email = user.getEmail();
+                                //Uri photoUrl = user.getPhotoUrl();
+
+                                // Check if user's email is verified
+                                boolean emailVerified = user.isEmailVerified();
+
+                                // The user's ID, unique to the Firebase project. Do NOT use this value to
+                                // authenticate with your backend server, if you have one. Use
+                                // FirebaseUser.getIdToken() instead.
+                                String uid = user.getUid();
+
+                                Toast.makeText( MainActivity.this, "Successful Login,the uid is="+uid, Toast.LENGTH_LONG ).show();
+
+                            }
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(LOG_TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                            Log.w( LOG_TAG, "signInWithEmail:failure", task.getException() );
+                            Toast.makeText( MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT ).show();
+                            updateUI( null );
                         }
 
                         // ...
                     }
-                });
+                } );
 
 
     }
@@ -100,12 +119,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.loginBtn:
-                    signIn( username.getText().toString(),password.getText().toString());
+                signIn( username.getText().toString(), password.getText().toString() );
 
                 break;
 
             case R.id.registerBtn:
-                register( username.getText().toString(),password.getText().toString() );
+                register( username.getText().toString(), password.getText().toString() );
 
 //                intent = new Intent( this, requestForLogin.class );
 //                startActivity( intent );
@@ -117,31 +136,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
-            public void register (String username,String password) {
 
-                mAuth.createUserWithEmailAndPassword(username, password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(LOG_TAG, "createUserWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    updateUI(user);
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(LOG_TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(MainActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    updateUI(null);
-                                }
+    public void register(String username, String password) {
 
-                                // ...
-                            }
-                        });
+        mAuth.createUserWithEmailAndPassword( username, password )
+                .addOnCompleteListener( this, new OnCompleteListener <AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task <AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d( LOG_TAG, "createUserWithEmail:success" );
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI( user );
 
 
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w( LOG_TAG, "createUserWithEmail:failure", task.getException() );
+                            Toast.makeText( MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT ).show();
+                            updateUI( null );
+                        }
+
+                        // ...
+                    }
+                } );
 
 
-            }
+    }
 }
