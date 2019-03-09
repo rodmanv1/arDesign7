@@ -1,16 +1,15 @@
 package com.dev.vova.ardesign7;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -51,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
+        getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN );
+
 
     }
 
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d( LOG_TAG, "signInWithEmail:success" );
-                            Toast.makeText( MainActivity.this, "Login Success", Toast.LENGTH_SHORT ).show();
+                            //      Toast.makeText( MainActivity.this, "Login Success", Toast.LENGTH_SHORT ).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI( user );
                             user = FirebaseAuth.getInstance().getCurrentUser();
@@ -92,8 +93,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 // authenticate with your backend server, if you have one. Use
                                 // FirebaseUser.getIdToken() instead.
                                 String uid = user.getUid();
-
-                                Toast.makeText( MainActivity.this, "Successful Login,the uid is="+uid, Toast.LENGTH_LONG ).show();
+                                Intent intent = new Intent(MainActivity.this, Navigation_Sidebar.class);
+                                startActivity(intent);
+                                finish();
+                                Toast.makeText( MainActivity.this, "Successful Login,the uid is=" + uid, Toast.LENGTH_LONG ).show();
 
                             }
                         } else {
@@ -119,15 +122,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.loginBtn:
+
+
                 signIn( username.getText().toString(), password.getText().toString() );
+
+
 
                 break;
 
             case R.id.registerBtn:
                 register( username.getText().toString(), password.getText().toString() );
 
-//                intent = new Intent( this, requestForLogin.class );
-//                startActivity( intent );
 
                 break;
 
