@@ -2,6 +2,7 @@ package com.dev.vova.ardesign7;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,6 +28,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText password;
 
     String LOG_TAG = "myLogs";
+
+    // Toolbar toolbar = findViewById( R.id.toolbar );
+
+    //  @Override
+//    public void setSupportActionBar(@Nullable android.support.v7.widget.Toolbar toolbar) {
+//        super.setSupportActionBar( toolbar );
+//
+//        getSupportActionBar().setTitle( "Ar Design" );
+//        getSupportActionBar().setIcon( getDrawable(R.drawable.ardesign_icon ) );
+//    }
 
     private FirebaseAuth mAuth;
 
@@ -93,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 // authenticate with your backend server, if you have one. Use
                                 // FirebaseUser.getIdToken() instead.
                                 String uid = user.getUid();
-                                Intent intent = new Intent(MainActivity.this, Navigation_Sidebar.class);
-                                startActivity(intent);
+                                Intent intent = new Intent( MainActivity.this, Navigation_Sidebar.class );
+                                startActivity( intent );
                                 finish();
                                 Toast.makeText( MainActivity.this, "Successful Login,the uid is=" + uid, Toast.LENGTH_LONG ).show();
 
@@ -125,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 signIn( username.getText().toString(), password.getText().toString() );
-
 
 
                 break;
